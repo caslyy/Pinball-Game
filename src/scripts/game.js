@@ -21,12 +21,20 @@ let config = {
 let game = new Phaser.Game(config);
 
 function preload() {
-    this.load.image('ball', 'assets/sprites/pangball.png');
+    this.load.image('ball', 'src/assets/sprites/general/ball.png');
 }
 
 function create() {
     // https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Matter.World.html
-    this.matter.world.setBounds(0, 0, config.width, config.height, 32, true, true, true, true);
+    this.matter.world.setBounds(0, 0, config.width, config.height, 32, true, true, false, true);
+
+    for (var i = 0; i < 64; i++)
+    {
+        var ball = this.matter.add.image(400, -400, 'ball');
+        ball.setCircle();
+        ball.setFriction(0.005);
+        ball.setBounce(1);
+    }
 }
 
 function update() {
